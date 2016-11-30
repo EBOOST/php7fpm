@@ -18,7 +18,13 @@ RUN docker-php-ext-install intl iconv mcrypt pdo pdo_mysql pdo_sqlite tokenizer\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install opcache \
-    && docker-php-ext-install zip \
-    && docker-php-ext-install soap
+    && docker-php-ext-install zip
+
+# soap
+RUN buildRequirements="libxml2-dev" \
+	&& apt-get update && apt-get install -y ${buildRequirements} \
+	&& docker-php-ext-install soap \
+	&& apt-get purge -y ${buildRequirements} \
+	&& rm -rf /var/lib/apt/lists/*
 
 CMD ["php-fpm"]
