@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
         libpng12-dev \
         libicu-dev \
         libsqlite-dev \
-        libsqlite3-dev
+        libsqlite3-dev \
+        libmagickwand-dev \
+        libmagickcore-dev
 
 RUN pecl install imagick
 
@@ -20,7 +22,8 @@ RUN docker-php-ext-install intl iconv mcrypt pdo pdo_mysql pdo_sqlite tokenizer\
     && docker-php-ext-install opcache \
     && docker-php-ext-install zip \
     && docker-php-ext-install mbstring \
-    && docker-php-ext-install exif
+    && docker-php-ext-install exif \
+    && docker-php-ext-enable imagick
 
 # soap
 RUN buildRequirements="libxml2-dev" \
