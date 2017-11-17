@@ -23,7 +23,8 @@ RUN docker-php-ext-install intl iconv mcrypt pdo pdo_mysql pdo_sqlite tokenizer\
     && docker-php-ext-install zip \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install exif \
-    && docker-php-ext-enable imagick
+    && docker-php-ext-enable imagick \
+    && docker-php-ext-install bcmath
 
 # soap
 RUN buildRequirements="libxml2-dev" \
